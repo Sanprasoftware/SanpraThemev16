@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 :root {
     --zi-base: 0;
     --zi-raised: 10;
@@ -255,8 +256,7 @@
    :root defaults overridden at runtime by <style id="st-dynamic-theme">
    ============================================================================= */
 
-/* ── INTER FONT ────────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+/* ── INTER FONT (moved to top of file: @import must precede all rules) ── */
 
 body,
 .form-control,
