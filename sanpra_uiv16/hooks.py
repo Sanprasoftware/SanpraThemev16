@@ -28,7 +28,7 @@ app_include_css = [
     "/assets/sanpra_uiv16/css/module_cards.css?v=2",
     "/assets/sanpra_uiv16/css/density.css?v=2",
     "/assets/sanpra_uiv16/css/theme_studio.css?v=21",
-    "/assets/sanpra_uiv16/css/grid_row_slide_panel.css?v=3",
+    "/assets/sanpra_uiv16/css/grid_row_slide_panel.css?v=4",
 ]
 app_include_js = [
     "/assets/sanpra_uiv16/js/frappe_compat.js?v=2",
