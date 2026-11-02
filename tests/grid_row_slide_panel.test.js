@@ -137,3 +137,36 @@ test("backdrop click and Escape close the currently open panel via Frappe's own 
   runtime.fireEscape();
   assert.equal(headingClicked, true);
 });
+
+test("panel z-index is higher than backdrop z-index in grid_row_slide_panel.css", () => {
+  const cssPath = path.join(
+    __dirname, "..", "sanpra_uiv16", "public", "css", "grid_row_slide_panel.css"
+  );
+  const css = fs.readFileSync(cssPath, "utf8");
+
+  const panelMatch = css.match(/body\.st-grid-slide-panel-enabled\s+\.form-in-grid\s*\{[^}]*?z-index:\s*var\((--zi-[^)]+)\)/s);
+  assert.ok(panelMatch, "panel z-index must use a --zi-* token");
+  const panelToken = panelMatch[1];
+
+  const backdropMatch = css.match(/\.st-grid-slide-backdrop\s*\{[^}]*?z-index:\s*var\((--zi-[^)]+)\)/s);
+  assert.ok(backdropMatch, "backdrop z-index must use a --zi-* token");
+  const backdropToken = backdropMatch[1];
+
+  const tokenRanks = {
+    "--zi-base": 0,
+    "--zi-raised": 10,
+    "--zi-overlay": 1000,
+    "--zi-editor": 1200,
+    "--zi-modal": 2000,
+    "--zi-top": 99999,
+  };
+
+  assert.ok(
+    tokenRanks[panelToken] > tokenRanks[backdropToken],
+    `Panel z-index (${panelToken}: ${tokenRanks[panelToken]}) must be strictly greater than backdrop (${backdropToken}: ${tokenRanks[backdropToken]}) to prevent backdrop from dimming the panel`
+  );
+
+  const headingMatch = css.match(/\.grid-form-heading\s*\{[^}]*?z-index:\s*var\((--zi-[^)]+)\)/s);
+  assert.ok(headingMatch, "grid-form-heading must use a --zi-* token");
+  assert.equal(headingMatch[1], "--zi-raised", "grid-form-heading must have --zi-raised to stay above scrolled panel content");
+});
