@@ -506,6 +506,31 @@
           var compat = ST.compat;
           var app = compat && compat.hasDock ? appMeta[$(this).attr("data-app")] : null;
           var landing = app && compat ? compat.appLandingRoute(app) : null;
+          /* A Desk workspace owned by the app wins over a portal landing:
+             the workspace aggregates the portal link plus its management
+             screens (e.g. LMS app -> /desk/learning which links to /lms).
+             Match by slug so raw names ("Learning") and slugs ("learning")
+             both hit; fall through to the portal path below when the app
+             has no Desk workspace. Null-guarded: boot may not have loaded
+             frappe.workspaces yet. */
+          var dataRoute = $(this).attr("data-route") || "";
+          var wsKey = null;
+          try {
+            if (window.frappe && frappe.workspaces && frappe.router && typeof frappe.router.slug === "function") {
+              var cand = String(dataRoute).split("/")[0];
+              var slug = frappe.router.slug(cand);
+              var lowered = String(cand).toLowerCase();
+              var keys = Object.keys(frappe.workspaces || {});
+              for (var wi = 0; wi < keys.length; wi++) {
+                if (keys[wi] === cand || keys[wi] === slug || String(keys[wi]).toLowerCase() === lowered) { wsKey = keys[wi]; break; }
+              }
+            }
+          } catch (err) { wsKey = null; }
+          if (wsKey) {
+            frappe.set_route(wsKey);
+            setTimeout(syncRailHighlight, 0);
+            return;
+          }
           /* Portal/external routes (e.g. LMS /lms) are not Desk workspaces: a
              full navigation avoids the "Khong tim thay Trang ..." modal that
              frappe.set_route() raises for unknown Desk routes. */
