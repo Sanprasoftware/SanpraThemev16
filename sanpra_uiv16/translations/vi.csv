@@ -1,0 +1,137 @@
+Accent Color,Màu nhấn
+Account,الحساب
+Active Theme Profile,Hồ sơ giao diện đang dùng
+Activity,النشاط
+Administrator-only Preview,Chỉ quản trị viên xem trước
+All clear — nothing needs attention.,كل شيء على ما يرام — لا شيء يتطلب الانتباه.
+All clear!,لا شيء معلق!
+All Options,جميع الخيارات
+All Workspaces,جميع مساحات العمل
+Allow User Theme Choice,Cho phép người dùng chọn giao diện
+Allow users to select an assigned or available theme profile.,Cho phép người dùng chọn hồ sơ giao diện được gán hoặc khả dụng.
+Appearance,المظهر
+Apply the published Theme Studio configuration.,Áp dụng cấu hình Theme Studio đã xuất bản.
+Auto-fill Branding,Tự điền thương hiệu
+Back Link Label,Nhãn liên kết quay lại
+Back Link URL,URL liên kết quay lại
+Badge Text,Chữ huy hiệu
+Base Font Size,Cỡ chữ cơ sở
+Brand Color,Màu thương hiệu
+Button Label,Nhãn nút
+Card Background,Nền thẻ
+Card Shadow,Bóng thẻ
+Centered Card,Thẻ căn giữa
+Change language,تغيير اللغة
+Choose a brand color,اختر لون العلامة التجارية
+Close,إغلاق
+Color for buttons and highlights,Màu nút bấm và điểm nhấn
+Colors,Màu sắc
+Comfortable,مريح
+Compact,مضغوط
+Compact shows more rows on screen. Each user can override in All Options.,Chế độ gọn hiện nhiều dòng hơn. Mỗi người dùng có thể đổi trong Tất cả tùy chọn.
+Corner Radius,Bo góc
+Custom Presets,Cài đặt sẵn tùy chỉnh
+Default appearance for new users. Auto follows the operating system. Each user can override from the toolbar.,Giao diện mặc định cho người dùng mới. Tự theo hệ điều hành. Mỗi người dùng có thể đổi từ thanh công cụ.
+Default Density,Mật độ mặc định
+Default Theme Mode,Chế độ giao diện mặc định
+Defaults to a lighter Brand Color.,Mặc định dùng màu thương hiệu nhạt hơn.
+Defaults to Brand Color.,Mặc định dùng Màu thương hiệu.
+Density,الكثافة
+Dismiss,إغلاق
+e.g. / or https://example.com. Leave empty to hide the link.,ví dụ / hoặc https://example.com. Để trống ẩn liên kết.
+Elevated,Nổi
+Enable Command Palette (Ctrl+K),Bật bảng lệnh (Ctrl+K)
+Enable Published Theme,Bật giao diện đã xuất bản
+Enable Smart Home Screen,Bật màn hình chính thông minh
+Eyebrow,Dòng mở đầu
+Favicon,Biểu tượng trang (Favicon)
+Feature Cards,Thẻ tính năng
+Features,Tính năng
+Fine-tune the desk visually from Theme Studio. Empty color fields use the automatic brand palette.,Tinh chỉnh giao diện Desk từ Theme Studio. Màu để trống dùng bảng màu thương hiệu tự động.
+Force the administrator-selected theme and ignore user overrides.,"Ép dùng giao diện quản trị viên đã chọn, bỏ qua tùy chọn người dùng."
+General,عام
+Good afternoon,طاب نهارك
+Good evening,مساء الخير
+Good morning,صباح الخير
+Gradient End,Kết thúc chuyển sắc
+Gradient Start,Bắt đầu chuyển sắc
+Hero Panel,Bảng nổi bật
+Home,الرئيسية
+Icon Rail,Thanh biểu tượng
+Icon Rail Active Color,Màu kích hoạt thanh biểu tượng
+Icon Rail Background,Nền thanh biểu tượng
+"Icon Rail shows a slim app-icon column beside the workspace list, with each workspace's own items shown when its icon is selected. Tree reverts to Frappe's classic single-column sidebar.",Thanh biểu tượng hiện cột icon ứng dụng gọn bên cạnh danh sách workspace; mỗi workspace hiện mục riêng khi chọn icon. Dạng cây trở về sidebar một cột cổ điển của Frappe.
+Icon Rail Width,Độ rộng thanh biểu tượng
+Loading…,جارٍ التحميل…
+Lock Theme,Khóa giao diện
+Login Feature Card,Thẻ tính năng trang đăng nhập
+Login Page Settings,Cài đặt trang đăng nhập
+Logo on Hero Panel,Logo trên bảng nổi bật
+My ToDos,مهامي
+"Name and logo come from your default Company (then Theme Studio / Website Settings). Untick to set your own name, logo and colours.","Tên và logo lấy từ Công ty mặc định (rồi Theme Studio / Cài đặt website). Bỏ chọn để đặt tên, logo và màu riêng."
+Navbar Background,Nền thanh điều hướng
+Needs Attention,يتطلب الانتباه
+No create permissions found.,لم يتم العثور على صلاحيات إنشاء.
+No recent documents yet. Start by opening any record.,لا توجد مستندات حديثة بعد. ابدأ بفتح أي سجل.
+"No results for ""{0}""","لا توجد نتائج لـ ""{0}"""
+No workspaces found.,لم يتم العثور على مساحات عمل.
+Notifications,الإشعارات
+Off: the login page keeps its previous Theme Studio look.,Tắt: trang đăng nhập giữ giao diện Theme Studio cũ.
+Open Orders,طلبات مفتوحة
+Open Tasks,مهام مفتوحة
+Open Theme Settings,فتح إعدادات المظهر
+Open Theme Studio,فتح استوديو المظهر
+Optional light/white version shown on the colored panel. Falls back to Logo.,Bản sáng/trắng tùy chọn hiện trên bảng màu. Mặc định dùng Logo.
+Optional override for light mode cards and forms.,Ghi đè tùy chọn cho thẻ và biểu mẫu ở chế độ sáng.
+Optional override for light mode primary text.,Ghi đè tùy chọn cho chữ chính ở chế độ sáng.
+Optional override for light mode.,Ghi đè tùy chọn cho chế độ sáng.
+Optional override. Leave empty for the automatic theme value.,Ghi đè tùy chọn. Để trống dùng giá trị giao diện tự động.
+Optional override. Leave empty to reuse the site's accent color.,Ghi đè tùy chọn. Để trống dùng lại màu nhấn của site.
+Page Background,Nền trang
+Panel Title,Tiêu đề bảng
+Personalization Defaults,Cá nhân hóa mặc định
+Published Theme Configuration,Cấu hình giao diện đã xuất bản
+Quick Create,إنشاء سريع
+Recent Documents,المستندات الأخيرة
+Sanpra UI V16 Setup,إعداد Sanpra UI V16
+Saved Presets,Cài đặt sẵn đã lưu
+Search workspaces & options…,ابحث في مساحات العمل والخيارات…
+Security Note,Ghi chú bảo mật
+Set your company name,حدد اسم شركتك
+Show Feature Panel,Hiện bảng tính năng
+Show Grid Pattern,Hiện họa tiết lưới
+"Shown with a green dot, e.g. ""Securely connected"".","Hiện kèm chấm xanh, ví dụ ""Đã kết nối bảo mật""."
+Sidebar Background,Nền sidebar
+Sidebar Layout,Bố cục sidebar
+Sidebar Width,Độ rộng sidebar
+Sign-in Card,Thẻ đăng nhập
+Soft,Mềm
+Split Screen,Chia màn hình
+Start in Dark Mode,Khởi động ở chế độ tối
+Status Text,Chữ trạng thái
+Subtitle,Phụ đề
+Tagline (optional),Khẩu hiệu (tùy chọn)
+Theme Assignments,Gán giao diện
+Theme Draft,Bản nháp giao diện
+Theme Preference,Tùy chọn giao diện
+Theme Preset,Mẫu giao diện
+Theme Profile,Hồ sơ giao diện
+Theme Profiles,Các hồ sơ giao diện
+Theme Schedule,Lịch giao diện
+Theme Settings,Cài đặt giao diện
+Theme Studio Engine,Engine Theme Studio
+Theme Studio Preview Layout,Bố cục xem trước Theme Studio
+Theme Version History,Lịch sử phiên bản giao diện
+To-Do,المهام
+Today's View,نظرة اليوم
+Unpaid Invoices,فواتير غير مدفوعة
+Unpublished live previews remain visible only to System Managers.,Xem trước trực tiếp chưa xuất bản chỉ quản trị viên hệ thống thấy.
+Up to 4 cards. Leave empty to use the built-in cards.,Tối đa 4 thẻ. Để trống dùng thẻ có sẵn.
+Upload your logo,قم برفع شعارك
+Use Login Page Designer,Dùng trình thiết kế trang đăng nhập
+Use {company} anywhere to insert the company name.,Dùng {company} ở mọi nơi để chèn tên công ty.
+Visual Design,Thiết kế trực quan
+{0} expense claims pending,{0} مطالبات مصاريف معلقة
+{0} leave applications awaiting approval,{0} طلبات إجازة بانتظار الموافقة
+{0} overdue sales invoices,{0} فواتير مبيعات متأخرة
+{0} pending purchase orders,{0} أوامر شراء معلقة
