@@ -29,7 +29,7 @@ class CssImportTopTest(unittest.TestCase):
 
     def test_bump_v78(self):
         hooks = HOOKS.read_text(encoding="utf-8")
-        self.assertIn("sanpra_uiv16.css?v=78", hooks)
+        self.assertIn("sanpra_uiv16.css?v=79", hooks)
 
 
 if __name__ == "__main__":

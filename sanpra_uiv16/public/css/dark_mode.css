@@ -496,7 +496,8 @@ html[data-theme="dark"] #st-options-panel {
   background-color: var(--st-card-bg) !important;
 }
 
-html[data-theme="dark"] #st-options-search {
+html[data-theme="dark"] #st-options-search,
+html[data-theme="dark"] #st-user-theme-profile {
   background-color: var(--st-input-bg) !important;
   color: var(--st-text) !important;
   border-color: rgba(255,255,255,0.12) !important;

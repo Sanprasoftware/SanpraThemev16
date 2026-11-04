@@ -2448,7 +2448,7 @@ html[data-theme="dark"] .st-ud-app-ver {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.35);
-  z-index: var(--zi-overlay);
+  z-index: var(--zi-editor);
   backdrop-filter: blur(2px);
 }
 #st-options-overlay.open {
@@ -2463,7 +2463,7 @@ html[data-theme="dark"] .st-ud-app-ver {
   max-width: 92vw;
   height: 100vh;
   background: var(--sanpra-c-fff);
-  z-index: var(--zi-overlay);
+  z-index: var(--zi-modal);
   box-shadow: -8px 0 32px rgba(0,0,0,0.18);
   display: flex;
   flex-direction: column;
@@ -2840,16 +2840,31 @@ html[dir="rtl"] #st-lang-dropdown {
   padding: 0 0 8px 0;
   cursor: default;
 }
-.st-ap-row {
+.st-ap-row,
+.st-op-appearance-row,
+.st-theme-profile-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 10px;
   padding: 4px 0;
 }
-.st-ap-label {
+.st-ap-label,
+.st-op-app-label {
   font-size: 12px;
   color: var(--text-muted, var(--text-color));
+}
+#st-user-theme-profile {
+  width: auto;
+  max-width: 180px;
+  height: 28px;
+  padding: 2px 8px;
+  border: 1px solid var(--border-color, rgba(0, 0, 0, 0.12));
+  border-radius: 8px;
+  font-size: 11.5px;
+  font-family: inherit;
+  background: transparent;
+  color: var(--text-color);
 }
 .st-ap-seg {
   display: inline-flex;
