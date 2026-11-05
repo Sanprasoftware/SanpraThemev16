@@ -57,7 +57,7 @@ class LoginPageSettings(Document):
             self.set(field, sources.get(field) or "")
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET", "POST"])
 def fetch_branding():
     """Current site branding, for the form's Fetch Branding button."""
     frappe.only_for("System Manager")
