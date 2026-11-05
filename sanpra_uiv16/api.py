@@ -71,7 +71,7 @@ def _theme_config(settings):
 
 # ── 2. THEME CSS / CONFIG COMPATIBILITY ENDPOINTS ──────────────────────────────
 # Theme Studio owns publishing; these routes remain stable for older clients.
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist(allow_guest=True, methods=["GET", "POST"])
 def get_theme_css():
     """Return :root CSS variable overrides from Theme Settings.
     Only the base brand colors + site-default font size are emitted — all
@@ -91,14 +91,14 @@ def get_theme_css():
         return ""
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET", "POST"])
 def get_theme_config():
     """Return the editable Theme Studio configuration."""
     frappe.only_for("System Manager")
     return theme_engine.published_config(frappe.get_single("Theme Settings"))
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def save_theme_config(config):
     """Compatibility alias for the complete Theme Studio publish endpoint."""
     from sanpra_uiv16.theme_api import publish_theme_config
@@ -107,7 +107,7 @@ def save_theme_config(config):
 
 # ── 3. PUBLIC BRANDING ─────────────────────────────────────────────────────────
 # Login needs this before authentication, so output is intentionally display-only.
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist(allow_guest=True, methods=["GET", "POST"])
 def get_branding():
     """Return branding config dict for JS logo/favicon/title injection."""
     try:
@@ -153,7 +153,7 @@ def get_branding():
 
 
 # ── 4. DESK NAVIGATION DATA ────────────────────────────────────────────────────
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET", "POST"])
 def get_workspaces():
     """Version-proof workspace list for the module switcher, All Options
     panel, and app launcher grid.
@@ -179,7 +179,7 @@ def get_workspaces():
 
 
 # ── 5. LANGUAGE PREFERENCE ─────────────────────────────────────────────────────
-@frappe.whitelist()
+@frappe.whitelist(methods=["GET", "POST"])
 def get_available_languages():
     """Return enabled languages for the language switcher in the top toolbar."""
     try:
@@ -195,7 +195,7 @@ def get_available_languages():
         return []
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def set_user_language(lang_code):
     """Persist the chosen language on the logged-in User record."""
     if not frappe.session.user or frappe.session.user == "Guest":
@@ -208,7 +208,7 @@ def set_user_language(lang_code):
 
 
 # ── 6. USER WORKSPACE / APPEARANCE UTILITIES ───────────────────────────────────
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def reset_workspace_for_user():
     """Delete all user-specific Workspace customizations for the current user.
 
@@ -225,14 +225,20 @@ def reset_workspace_for_user():
         filters={"for_user": user},
         pluck="name",
     )
+    # S4: Workspace chi cho System Manager quyen delete; day la thao tac
+    # nguoi dung tu xoa ban sao cua CHINH MINH (filters for_user bat buoc),
+    # nen can ignore_permissions. Moi lan xoa deu ghi audit log.
     for name in user_workspaces:
         frappe.delete_doc("Workspace", name, ignore_permissions=True, force=True)
 
+    frappe.logger("sanpra_uiv16").info(
+        "reset_workspace_for_user user=%s deleted=%s", frappe.session.user, len(user_workspaces)
+    )
     frappe.cache.hdel("bootinfo", user)
     return {"reset": len(user_workspaces)}
 
 
-@frappe.whitelist()
+@frappe.whitelist(methods=["POST"])
 def set_user_theme(theme):
     """Persist dark/light mode preference on the User record.
 

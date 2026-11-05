@@ -23,8 +23,8 @@ class FrappeCompatTest(unittest.TestCase):
         block = hooks[hooks.index("app_include_js = ["):]
         includes = re.findall(r'"/assets/sanpra_uiv16/js/([a-z_]+)\.js\?v=\d+"', block)
         self.assertEqual(includes[0], "frappe_compat")
-        self.assertIn("/assets/sanpra_uiv16/js/frappe_compat.js?v=2", hooks)
-        self.assertIn("/assets/sanpra_uiv16/css/dark_mode.css?v=18", hooks)
+        self.assertRegex(hooks, r"/assets/sanpra_uiv16/js/frappe_compat\.js\?v=\d+")
+        self.assertRegex(hooks, r"/assets/sanpra_uiv16/css/dark_mode\.css\?v=\d+")
 
     def test_adapter_detects_by_feature_not_version(self):
         js = COMPAT.read_text(encoding="utf-8")

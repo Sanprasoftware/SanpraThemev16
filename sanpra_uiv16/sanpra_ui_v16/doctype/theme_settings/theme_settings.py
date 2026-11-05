@@ -13,7 +13,7 @@ class ThemeSettings(Document):
         frappe.clear_cache()
 
 
-@frappe.whitelist(allow_guest=True)
+@frappe.whitelist(allow_guest=True, methods=["GET", "POST"])
 def get_theme_settings():
     """Returns theme settings for JS branding/CSS variable injection."""
     try:

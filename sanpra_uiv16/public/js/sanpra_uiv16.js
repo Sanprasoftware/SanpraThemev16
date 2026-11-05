@@ -750,15 +750,6 @@
   }
 
   /* ────────────────────────────────────────────────────────────────────────────
-     8. POWERED-BY BADGE
-  ──────────────────────────────────────────────────────────────────────────── */
-  function injectPoweredBy() {
-    var $sidebar = $(".body-sidebar").first();
-    if (!$sidebar.length || $sidebar.find("#st-powered-by").length) return;
-    $sidebar.append('<div id="st-powered-by">Powered by <strong>Sanpra Software</strong></div>');
-  }
-
-  /* ────────────────────────────────────────────────────────────────────────────
      9a. SETUP GUIDE BANNER (first-run, System Manager only)
   ──────────────────────────────────────────────────────────────────────────── */
   function injectSetupGuide() {
@@ -1747,7 +1738,6 @@
       injectSidebarBrandingHeader();   /* retry — branding may already be cached */
       injectIconRail();
       patchNativeSidebar();
-      injectPoweredBy();
     });
 
     injectSetupGuide();
@@ -1763,7 +1753,6 @@
         injectIconRail();
       });
       patchNativeSidebar();
-      injectPoweredBy();
       injectSetupGuide();
       injectHeadingSemantics();
       setTimeout(moveNativeBell, 400);
