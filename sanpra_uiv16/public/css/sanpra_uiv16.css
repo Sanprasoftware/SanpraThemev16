@@ -628,8 +628,6 @@ body.st-sidebar-collapsed .desk-sidebar .sidebar-group-title,
 body.st-sidebar-collapsed .desk-sidebar .sidebar-section-head,
 body.st-sidebar-collapsed #st-module-switch-btn span:not(:first-child),
 body.st-sidebar-collapsed #st-quick-nav a span,
-body.st-sidebar-collapsed #st-powered-by,
-body.sidebar-collapsed #st-powered-by, /* Frappe 16.50 folded sidebar */
 body.st-sidebar-collapsed #st-sidebar-header .st-app-brand {
   display: none !important;
 }
@@ -1622,18 +1620,6 @@ html[data-theme="dark"] .for-forgot .page-card-actions::after {
   background: color-mix(in srgb, var(--st-accent) 12%, transparent);
 }
 
-/* ── POWERED-BY BADGE ───────────────────────────────────────────────────────── */
-#st-powered-by {
-  text-align: center;
-  font-size: 11px;
-  color: rgba(0,0,0,0.28);  /* dark text — works on light sidebar */
-  padding: 3px 0 8px;
-  letter-spacing: 0.03em;
-}
-/* Dark mode: sidebar is brand-colored (dark), so text must be white */
-html[data-theme="dark"] #st-powered-by {
-  color: rgba(255,255,255,0.28);
-}
 
 /* ── SETUP GUIDE BANNER ─────────────────────────────────────────────────────── */
 #st-setup-guide {
