@@ -5,7 +5,6 @@
    CSS vars are fallbacks; login_theme.js injects live brand values from API.
    ============================================================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* ── FALLBACK VARIABLES ─────────────────────────────────────────────────── */
 :root {

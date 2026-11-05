@@ -12,12 +12,13 @@ app_version = "2.5.0"
 required_apps = []
 
 # ── PUBLIC LOGIN ASSETS ────────────────────────────────────────────────────────
-web_include_css = ["/assets/sanpra_uiv16/css/login.css?v=13"]
+web_include_css = ["/assets/sanpra_uiv16/css/fonts.css?v=1", "/assets/sanpra_uiv16/css/login.css?v=14"]
 web_include_js = ["/assets/sanpra_uiv16/js/login_theme.js?v=9"]
 
 # ── AUTHENTICATED DESK ASSETS ──────────────────────────────────────────────────
 # Query versions are bumped whenever an asset changes to invalidate browser cache.
 app_include_css = [
+    "/assets/sanpra_uiv16/css/fonts.css?v=1",
     "/assets/sanpra_uiv16/css/sanpra_uiv16.css?v=79",
     "/assets/sanpra_uiv16/css/sidebar.css?v=43",
     "/assets/sanpra_uiv16/css/command_palette.css?v=8",
