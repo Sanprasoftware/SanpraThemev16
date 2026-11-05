@@ -3042,3 +3042,39 @@ input.input-with-feedback.form-control.input-xs {
     opacity: 1;
   }
 }
+/* ── LIST FILTER BAR (page-form) polish — 05/11/2026 ──
+   Core renders filter fields as .input-group (input + match-type button)
+   inside .standard-filter-section, and the filter/sort actions as
+   .filter-section. Theme's global input border + radius split each field
+   into a detached box with loose row spacing. This block re-joins every
+   input with its button and tightens both rows. Touch target (36px) kept. */
+/* 1. Filter field row: even gaps, no loose margins, wrap on narrow screens */
+.list-page-form .standard-filter-section {
+  gap: 8px !important;
+  padding: 8px 12px !important;
+  align-items: flex-end !important;
+  flex-wrap: wrap !important;
+}
+.list-page-form .standard-filter-section .form-group {
+  margin-bottom: 0 !important;
+}
+/* 2. Join input + match-type button into a single control */
+.list-page-form .standard-filter-section .input-group .form-control {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  border-right: none !important;
+}
+.list-page-form .standard-filter-section .input-group .input-group-btn .btn.match-type-dropdown-btn {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  border: 1px solid var(--st-input-border) !important;
+  background: var(--st-card-bg, var(--sanpra-c-fff)) !important;
+  color: var(--st-text-muted) !important;
+  height: 100% !important;
+}
+/* 3. Filter/sort action row: one compact line */
+.list-page-form .filter-section {
+  gap: 8px !important;
+  padding: 6px 12px !important;
+  align-items: center !important;
+}
