@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.6.0] — 2026-11-05 — White-label + WCAG AA + self-hosted font
+
+### Fixed
+- Go badge "Powered by Sanpra Software" khoi Desk (white-label).
+- 242 token mau `--sanpra-c-*` bi tu tro (`var(--sanpra-c-X)`) -> gan hex literal.
+- Preset Sanpra/Forest/High Contrast dat WCAG AA (accent #B35200 / #8A6A1B / #000000) + fallback Python + README.
+- List filter bar: ghep input voi nut match-type, gon 2 hang filter.
+- 4 test literal cu + 16 `read_text()` thieu encoding (suite xanh Windows) + 17 assert `?v=` sang regex.
+
+### Security
+- Khai `methods=` cho 11 `@frappe.whitelist` (doc GET+POST, ghi POST-only).
+- **Breaking:** 4 endpoint mutation (`save_theme_config`, `set_user_language`, `reset_workspace_for_user`, `set_user_theme`) tra 403 khi goi bang GET.
+- `reset_workspace_for_user` co audit log (`frappe.logger("sanpra_uiv16")`) + comment S4.
+
+### Changed
+- Google Fonts `@import` -> self-host Inter variable (`@fontsource-variable/inter@5.3.0`, SIL OFL) + sua PRIVACY.md.
+- CI chay tren push `vietnam-clean` + job Windows (khong ep PYTHONUTF8).
+- Metadata: repo URL fork, frappe floor 16, license MIT.
+
+
 ## [2.5.0] — 2026-10-07 — Frappe 16.50 navigation
 
 Affects Frappe v16.50+ (new Dock navigation, tested on v16.50.0); v16.0 – v16.49 keep the previous behaviour. Includes the unreleased 2.4.1 login fixes below.

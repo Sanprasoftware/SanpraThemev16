@@ -7,7 +7,7 @@ app_email = "sales@sanpra.com"
 app_license = "MIT"
 app_color = "#E8610A"
 app_icon = "octicon octicon-paintcan"
-app_version = "2.5.0"
+app_version = "2.6.0"
 
 required_apps = []
 
