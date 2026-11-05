@@ -1,6 +1,7 @@
 """Stable Desk-facing API facade for theme, branding, and user utilities."""
 
 import json
+import logging
 import re
 
 import frappe
@@ -231,7 +232,10 @@ def reset_workspace_for_user():
     for name in user_workspaces:
         frappe.delete_doc("Workspace", name, ignore_permissions=True, force=True)
 
-    frappe.logger("sanpra_uiv16").info(
+    _audit = frappe.logger("sanpra_uiv16")
+    # UAT 2.6.0 F1: production log level = ERROR nuot .info() -> set INFO tuong minh.
+    _audit.setLevel(logging.INFO)
+    _audit.info(
         "reset_workspace_for_user user=%s deleted=%s", frappe.session.user, len(user_workspaces)
     )
     frappe.cache.hdel("bootinfo", user)

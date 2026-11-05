@@ -1911,7 +1911,7 @@ body.st-has-toolbar .navbar-default {
 /* Current time */
 #st-tb-clock {
   font-size: 11px;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255,255,255,0.6);
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.03em;
 }

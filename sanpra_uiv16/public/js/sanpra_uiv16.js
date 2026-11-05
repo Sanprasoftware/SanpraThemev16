@@ -1742,13 +1742,15 @@
 
     injectSetupGuide();
 
-    if (frappe.router && frappe.router.on) {
-      frappe.router.on("change", syncRailHighlight);
-    }
+    /* Retry-safe: page-change/router wiring chi dang ky 1 lan (onDeskReady co the chay lai). */
+    if (!ST._deskWired) {
+      if (frappe.router && frappe.router.on) {
+        frappe.router.on("change", syncRailHighlight);
+      }
 
     /* Move Frappe's native notification bell into toolbar after desktop page renders */
-    setTimeout(moveNativeBell, 800);
-    $(document).on("page-change", function () {
+      setTimeout(moveNativeBell, 800);
+      $(document).on("page-change", function () {
       railContainerReady(function () {
         injectIconRail();
       });
@@ -1757,13 +1759,19 @@
       injectHeadingSemantics();
       setTimeout(moveNativeBell, 400);
       setTimeout(syncRailHighlight, 0);
-    });
+      });
+      ST._deskWired = true;
+    }
 
     /* bootinfo.home_page owns the initial Smart Home redirect. Redirecting here
        can race Frappe's asynchronous deep-link parser and replace the target page. */
   }
 
   $(document).ready(onDeskReady);
+
+    /* UAT 2.6.0 F4: desk boot bat dong bo — lan dau co the chay khi frappe chua san sang
+       khien toolbar khong inject (2/5 load). Chay lai sau 3s; moi inject deu idempotent. */
+    setTimeout(function () { try { onDeskReady(); } catch (e) { /* bo qua, log o lan sau */ } }, 3000);
 
   /* ────────────────────────────────────────────────────────────────────────────
      LIVE THEME UPDATE

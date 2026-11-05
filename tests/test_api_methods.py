@@ -76,12 +76,17 @@ class ApiMethodsTest(unittest.TestCase):
         self.assertEqual(scan(), EXPECTED)
 
     def test_reset_workspace_co_audit_log(self):
-        src = (PKG / "api.py").read_text(encoding="utf-8")
+        api = (PKG / "api.py").read_text(encoding="utf-8")
+        # UAT 2.6.0 F1: production log level = ERROR nuot .info() -> phai setLevel INFO
+        # tuong minh, neu khong audit log chet ma test van xanh (pass-gia).
+        self.assertIn("import logging", api)
+        src = api
         start = src.index("def reset_workspace_for_user")
         body = src[start:]
         nxt = body.find("\n@frappe.whitelist", 1)
         body = body[:nxt] if nxt != -1 else body
         self.assertIn('frappe.logger("sanpra_uiv16")', body)
+        self.assertIn(".setLevel(logging.INFO)", body)
         self.assertIn("# S4:", body)
 
     def test_js_khong_fetch_endpoint_ghi(self):
