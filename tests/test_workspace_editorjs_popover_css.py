@@ -16,7 +16,7 @@ class WorkspaceEditorJSPopoverCSSTest(unittest.TestCase):
 
         self.assertIn(".ce-popover", css)
         self.assertIn(".ce-toolbar", css)
-        self.assertIn("z-index: 1201 !important", css)
+        self.assertIn("z-index: var(--zi-editor) !important", css)
 
     def test_workspace_card_hover_does_not_compete_with_open_editorjs_menu(self):
         css = CSS.read_text(encoding="utf-8")
@@ -34,7 +34,7 @@ class WorkspaceEditorJSPopoverCSSTest(unittest.TestCase):
         self.assertIn("installWorkspaceBlockPickerLayerFix", js)
         self.assertIn("st-editorjs-popover-host", js)
         self.assertIn("ce-toolbar__plus", js)
-        self.assertIn("z-index: 1195 !important", css)
+        self.assertIn("z-index: var(--zi-editor) !important", css)
 
     def test_workspace_css_cache_is_bumped(self):
         hooks = HOOKS.read_text(encoding="utf-8")

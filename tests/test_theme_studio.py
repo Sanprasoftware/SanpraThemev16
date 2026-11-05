@@ -243,7 +243,7 @@ class ThemeStudioTest(unittest.TestCase):
         self.assertIn("var(--st-sidebar-icon", sidebar_css)
         self.assertIn(".btn.icon-btn .es-icon", desk_css)
         self.assertIn(".editor-js-container .ce-header .h4", desk_css)
-        self.assertIn("var(--st-sidebar-bg, var(--fg-color, #fff))", dark_css)
+        self.assertIn("var(--st-sidebar-bg, var(--fg-color, var(--sanpra-c-fff)))", dark_css)
 
     def test_assets_are_versioned(self):
         hooks = HOOKS.read_text(encoding="utf-8")

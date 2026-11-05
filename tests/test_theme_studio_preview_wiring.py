@@ -70,7 +70,7 @@ class ThemeStudioPreviewWiringTest(unittest.TestCase):
 
         self.assertNotIn(".is-workspace-preview .sts-context-inspector { display: none; }", css)
         self.assertRegex(css, r"\.sts-workspace-preview iframe\s*\{[^}]*pointer-events:\s*none")
-        self.assertIn(".sts-workspace-shield { position: absolute; z-index: 2;", css)
+        self.assertIn(".sts-workspace-shield { position: absolute; z-index: var(--zi-base);", css)
         self.assertIn('tabindex="-1" aria-hidden="true"', js)
         self.assertIn('sandbox="allow-scripts allow-same-origin"', js)
         self.assertIn('class="sts-workspace-shield" aria-hidden="true"', js)
