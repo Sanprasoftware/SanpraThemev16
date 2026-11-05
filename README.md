@@ -201,7 +201,7 @@ This means any company — whether their brand is navy, green, red, or black —
 | Color | Hex | Used For |
 |---|---|---|
 | Brand | `#1B3F7E` | Sidebar, navbar, login |
-| Accent | `#F57C00` | Buttons, active items |
+| Accent | `#B35200` | Buttons, active items |
 | Page Background | Auto-generated | Light tint of brand color |
 | Cards / Forms | `#FFFFFF` | All content surfaces |
 

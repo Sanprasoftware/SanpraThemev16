@@ -528,7 +528,7 @@ def builtin_profiles():
         _profile(
             "builtin-high-contrast", "High Contrast",
             {
-                "brand_color": "#000000", "accent_color": "#FFD800",
+                "brand_color": "#000000", "accent_color": "#000000",
                 "navbar_background": "#000000", "toolbar_text_color": "#FFFFFF",
                 "sidebar_background": "#000000", "sidebar_text_color": "#FFFFFF",
                 "sidebar_icon_color": "#FFFFFF", "sidebar_active_color": "#FFD800",
@@ -544,16 +544,17 @@ def builtin_profiles():
         ),
         _profile(
             "builtin-sanpra", "Sanpra",
-            {"brand_color": "#1B3F7E", "accent_color": "#F57C00"},
+            {"brand_color": "#1B3F7E", "accent_color": "#B35200"},
             "Sanpra navy and orange identity.",
         ),
         _profile(
             "builtin-forest", "Forest",
             {
-                "brand_color": "#173F35", "accent_color": "#D59A28",
+                "brand_color": "#173F35", "accent_color": "#8A6A1B",
                 "navbar_background": "#102D26", "link_color": "#176B50",
-                "sidebar_active_color": "#D59A28", "focus_color": "#D59A28",
+                "sidebar_active_color": "#8A6A1B", "focus_color": "#8A6A1B",
             },
+            # Brass toi #8A6A1B (thay #D59A28) de dat WCAG AA voi chu trang; giu identity forest + brass.
             "Deep forest green with warm brass accents.",
         ),
     ]

@@ -83,3 +83,28 @@ def test_login_css_no_override_cam():
 def test_boot_py_no_fallback_cam():
     text = (ROOT / "sanpra_uiv16" / "boot.py").read_text(encoding="utf-8")
     assert 'bootinfo.st_accent = "#F57C00"' not in text
+
+
+AA_PROFILES = {
+    # key = mau dung lam nen voi chu trang (button/accent); High Contrast giu
+    # sidebar_active #FFD800 vi chu tren do duoc tinh bang contrast_text (den).
+    "builtin-sanpra": ("accent_color", "primary_button_color", "focus_color", "sidebar_active_color"),
+    "builtin-forest": ("accent_color", "primary_button_color", "focus_color", "sidebar_active_color"),
+    "builtin-high-contrast": ("accent_color", "primary_button_color"),
+}
+
+
+def test_builtin_presets_dat_aa_voi_chu_trang():
+    engine = load_engine()
+    profiles = {p["id"]: p["config"] for p in engine.builtin_profiles()}
+    for pid, keys in AA_PROFILES.items():
+        for key in keys:
+            color = profiles[pid][key]
+            ratio = engine.contrast_ratio(color, "#FFFFFF")
+            assert ratio >= 4.5, f"{pid}.{key} = {color}: {ratio:.2f}:1 < 4.5"
+
+
+def test_python_khong_con_fallback_cam_legacy():
+    rel = "sanpra_uiv16/sanpra_ui_v16/doctype/theme_settings/theme_settings.py"
+    text = (ROOT / rel).read_text(encoding="utf-8")
+    assert "#F57C00" not in text, f"{rel} con fallback #F57C00"
