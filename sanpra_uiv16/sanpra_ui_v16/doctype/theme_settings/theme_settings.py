@@ -24,7 +24,7 @@ def get_theme_settings():
             "favicon":                s.favicon,
             "tagline":                s.tagline,
             "brand_color":            s.brand_color  or "#1B3F7E",
-            "accent_color":           s.accent_color or "#F57C00",
+            "accent_color":           s.accent_color or "#B35200",
 
             "enable_command_palette": s.enable_command_palette,
             "enable_smart_home":      s.enable_smart_home,
@@ -34,6 +34,6 @@ def get_theme_settings():
     except Exception:
         return {
             "brand_color":    "#1B3F7E",
-            "accent_color":   "#F57C00",
+            "accent_color":   "#B35200",
             "sidebar_layout": "Icon Rail",
         }
