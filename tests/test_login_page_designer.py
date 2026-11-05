@@ -89,7 +89,7 @@ THEME = {"login_heading": "Theme heading", "login_description": "Theme subtitle"
 
 
 def settings(**values):
-    base = {field: None for field in json.loads(DOCTYPE.read_text())["field_order"]}
+    base = {field: None for field in json.loads(DOCTYPE.read_text(encoding="utf-8"))["field_order"]}
     base.update({"enabled": 1, "layout": "Split Screen", "auto_fetch_branding": 1, "feature_cards": []})
     base.update(values)
     return frappe._dict(base)
@@ -193,7 +193,7 @@ class SplitTemplateContractTest(unittest.TestCase):
     """Frappe's login.js drives the page by these hooks; losing one breaks a flow."""
 
     def test_template_keeps_frappe_login_hooks(self):
-        source = TEMPLATE.read_text()
+        source = TEMPLATE.read_text(encoding="utf-8")
         for hook in (
             'class="for-login"', "for-signup", 'class="for-forgot"', 'class="for-login-with-email-link"',
             "form-login", "form-forgot", "form-login-with-email-link", "signup_form_template",
@@ -205,7 +205,7 @@ class SplitTemplateContractTest(unittest.TestCase):
             self.assertIn(hook, source, hook)
 
     def test_user_copy_is_escaped(self):
-        source = TEMPLATE.read_text()
+        source = TEMPLATE.read_text(encoding="utf-8")
         # Colors are hex-validated in login_config before reaching the <style> block.
         validated = {"sl.brand_color", "sl.accent_color", "sl.hero_from", "sl.hero_to", "sl.on_hero"}
         unescaped = set(re.findall(r"{{\s*(sl\.[a-z_]+|card\.[a-z]+)\s*}}", source)) - validated
@@ -226,23 +226,23 @@ class SplitTemplateContractTest(unittest.TestCase):
     )
 
     def test_css_has_no_hardcoded_colors_outside_tokens(self):
-        css = CSS.read_text()
+        css = CSS.read_text(encoding="utf-8")
         found = {c.upper() for c in re.findall(r"#[0-9A-Fa-f]{3,8}\b", css)}
         self.assertEqual(found - self.ALLOWED_COLORS, set())
 
 
     def test_guest_page_never_uses_private_files(self):
-        source = LOGIN_CONFIG.read_text()
+        source = LOGIN_CONFIG.read_text(encoding="utf-8")
         self.assertIn('return "" if value.startswith("/private/") else value', source)
         self.assertNotIn("logo=theme_engine.clean_url(", source)
 
     def test_after_migrate_never_seeds_split_screen(self):
-        source = SETUP.read_text()
+        source = SETUP.read_text(encoding="utf-8")
         migrate = source[source.index("def after_migrate"):source.index("# ── LOGIN PAGE DESIGNER")]
         self.assertIn('_seed_defaults(login_layout="Centered Card")', migrate)
 
     def test_preview_stubs_login_calls(self):
-        source = TEMPLATE.read_text()
+        source = TEMPLATE.read_text(encoding="utf-8")
         self.assertIn("{% if sl_preview %}", source)
         self.assertIn("login.call = function ()", source)
 
@@ -258,7 +258,7 @@ class FrappeVersionResilienceTest(unittest.TestCase):
         return body[:body.index("}")]
 
     def test_form_fills_the_card_on_every_frappe_build(self):
-        css = CSS.read_text()
+        css = CSS.read_text(encoding="utf-8")
         form = self.rule(css, "html body.sl-split .sl-card form")
         self.assertIn("max-width: none !important", form)
         self.assertIn("margin: 0 !important", form)
@@ -266,7 +266,7 @@ class FrappeVersionResilienceTest(unittest.TestCase):
         self.assertIn("html body.sl-split .sl-card .page-card-actions { margin: 0 !important; }", css)
 
     def test_idle_message_rows_are_hidden_until_login_js_shows_them(self):
-        css = CSS.read_text()
+        css = CSS.read_text(encoding="utf-8")
         # CSS xuong dong (selector { \n display: none;) — khong assert substring 1 dong.
         success = self.rule(css, "html body.sl-split .sl-card .login-success-banner")
         self.assertIn("display: none", success)
@@ -275,13 +275,13 @@ class FrappeVersionResilienceTest(unittest.TestCase):
         self.assertIn("html body.sl-split .sl-card .form-group.invalid .field-error { display: block; }", css)
 
     def test_field_icons_are_centred_explicitly(self):
-        css = CSS.read_text()
+        css = CSS.read_text(encoding="utf-8")
         self.assertIn("top: 50% !important;", css)
         self.assertIn("transform: translateY(-50%) !important;", css)
 
     def test_stylesheet_is_cache_busted(self):
         # Chi can co ?v=<so> (cache-bust); khong hardcode so version (lac hau moi lan bump).
-        self.assertRegex(TEMPLATE.read_text(), r"login_split\.css\?v=\d+")
+        self.assertRegex(TEMPLATE.read_text(encoding="utf-8"), r"login_split\.css\?v=\d+")
 
 class BrandingSourcesTest(unittest.TestCase):
     def sources(self, theme=None, company="Acme Trading", company_logo="/files/acme.png",
@@ -314,7 +314,7 @@ class BrandingSourcesTest(unittest.TestCase):
     def test_private_company_logo_and_hook_logo_are_never_used(self):
         brand = self.sources(company_logo="/private/files/acme.png")
         self.assertEqual(brand["logo"], "")
-        source = LOGIN_CONFIG.read_text()
+        source = LOGIN_CONFIG.read_text(encoding="utf-8")
         self.assertNotIn("get_app_logo", source)
 
     def test_admin_site_logo_is_used_when_company_has_none(self):
@@ -324,17 +324,17 @@ class BrandingSourcesTest(unittest.TestCase):
 
 class FreshInstallSeedTest(unittest.TestCase):
     def test_seed_stores_switches_only_no_copy_or_vendor_name(self):
-        source = SETUP.read_text()
+        source = SETUP.read_text(encoding="utf-8")
         seed = source[source.index("def seed_login_page_settings"):]
         self.assertNotIn("headline", seed)
         self.assertNotIn("frappe.get_single(", seed)
         self.assertNotIn('"company_name":           "Sanpra"', source)
 
     def test_brand_name_patch_is_guarded(self):
-        patch = (APP / "patches" / "v2_4" / "clear_default_brand_name.py").read_text()
+        patch = (APP / "patches" / "v2_4" / "clear_default_brand_name.py").read_text(encoding="utf-8")
         self.assertIn('frappe.db.exists("Company", SEEDED_NAME)', patch)
         self.assertIn("!= SEEDED_NAME", patch)
-        self.assertIn("sanpra_uiv16.patches.v2_4.clear_default_brand_name", (APP / "patches.txt").read_text())
+        self.assertIn("sanpra_uiv16.patches.v2_4.clear_default_brand_name", (APP / "patches.txt").read_text(encoding="utf-8"))
 
 
 class BrandNameAutofillTest(unittest.TestCase):
@@ -369,7 +369,7 @@ class BrandNameAutofillTest(unittest.TestCase):
         self.assertIsNone(self.run_fill(None, website="Frappe", system="ERPNext"))
 
     def test_company_hook_is_registered(self):
-        hooks = (APP / "hooks.py").read_text()
+        hooks = (APP / "hooks.py").read_text(encoding="utf-8")
         self.assertIn('"after_insert": "sanpra_uiv16.events.company_after_insert"', hooks)
 
 
