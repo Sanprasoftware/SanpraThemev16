@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.6.1] — 2026-11-05 — UAT follow-up
+
+### Fixed
+- Ten cong ty sidebar xuong dong du (`st-company-name` bo ellipsis, header min-height).
+- Audit log `reset_workspace_for_user` that (production log level ERROR nuot `.info()`) -> `setLevel(logging.INFO)` tuong minh.
+- Contrast: dong ho toolbar 4.18 -> 6.22 (`white 0.6`); nhan rail 4.26 -> 6.75 (`--sanpra-c-4b5563`).
+- Toolbar race (2/5 load khong inject): retry `onDeskReady` sau 3s + wiring 1 lan.
+
+
 ## [2.6.0] — 2026-11-05 — White-label + WCAG AA + self-hosted font
 
 ### Fixed
