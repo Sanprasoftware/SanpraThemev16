@@ -929,12 +929,20 @@ a:hover { color: var(--st-primary-hover) !important; opacity: 0.85; }
 .list-row:nth-child(even) {
   background: var(--st-list-row-alt, var(--sanpra-c-f9fafb)) !important;
 }
-/* Sticky list header below toolbar */
-.list-row-head,
-.dt-header,
-.datatable .dt-header .dt-cell--header {
+/* Sticky list header below toolbar (page scroll context only) */
+.list-row-head {
   position: sticky !important;
   top: var(--st-header-height, 36px) !important;
+  z-index: var(--zi-raised) !important;
+}
+/* Datatable grid header sticks to its OWN scroll container (.dt-scrollable),
+   not 36px below it — the page offset covered exactly one body row
+   (AUDIT_UI-2-ANH-LOI_20261106 bug #1: STT hien 2,3,4, mat hang 1). */
+.dt-header,
+.datatable .dt-header,
+.datatable .dt-header .dt-cell--header {
+  position: sticky !important;
+  top: 0 !important;
   z-index: var(--zi-raised) !important;
 }
 .list-row:hover,
