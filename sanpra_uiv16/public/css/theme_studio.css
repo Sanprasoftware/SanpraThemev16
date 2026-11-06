@@ -121,6 +121,21 @@
 .sts-tabs button span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .sts-tabs button.active { border-color: var(--sanpra-c-263244); background: var(--sanpra-c-263244); color: var(--sanpra-c-fff); }
 .sts-tabs button.active b { color: var(--sanpra-c-efa987); }
+/* T301 — IA 4 nhóm accordion: group gom 3 sections, gập/mở có nhớ trạng thái. */
+.sts-tabs-grouped { grid-template-columns: minmax(0, 1fr); }
+.sts-tab-group { border: 1px solid var(--sanpra-c-e1ddd5); border-radius: 8px; background: var(--sanpra-c-fff); overflow: hidden; }
+.sts-tab-group-head {
+	width: 100%; height: 34px; display: flex; align-items: center; justify-content: space-between; gap: 6px; padding: 0 9px;
+	border: 0; background: var(--sanpra-c-f7f5f1); color: var(--sanpra-c-4f5660); font-size: 12px; font-weight: 750; cursor: pointer;
+}
+.sts-tab-group-head i { font-style: normal; transition: transform .16s ease; }
+.sts-tab-group.is-collapsed .sts-tab-group-head i { transform: rotate(-90deg); }
+.sts-tab-group-body { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 5px; padding: 5px; }
+.sts-tab-group.is-collapsed .sts-tab-group-body { display: none; }
+/* T302 — nút lật inspector cạnh nút đóng. */
+.sts-inspector-actions { display: flex; gap: 6px; }
+.sts-inspector-head > span > button,
+.sts-inspector-actions > button { width: 27px; height: 27px; border: 1px solid var(--sanpra-c-ddcfc4); border-radius: 7px; background: var(--sanpra-c-fff); color: var(--sanpra-c-795947); font-size: 15px; line-height: 1; }
 .sts-control-panel { display: none; }
 .sts-control-panel.active,
 .is-searching .sts-control-panel.search-match { display: block; }
