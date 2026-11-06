@@ -152,6 +152,31 @@ sanpra_uiv16.theme_studio_sections = [
 		controls: [["operations", "Operations", "operations"]],
 	},
 ];
+/* ── 1b. T301/T302 — IA 4 nhóm + mockup Edusuccess (ADR-0012, fork có kỷ luật).
+   4 nhóm bao phủ đúng 12 sections (3+3+3+3), không đổi id/title/index nên test
+   cũ kiểm 12 titles vẫn xanh. Mockup dùng literal Edusuccess thay placeholder
+   Sanpra/Ayesha/Northstar; giữ nguyên data-inspector/DOM để wiring cũ còn. */
+sanpra_uiv16.EDUSUCCESS_MOCKUP = {
+	app_title: "Edusuccess",
+	tagline: "edusuccess.vn",
+	greeting: "Chào buổi sáng, Giáo vụ",
+	workspace: "Không gian Edusuccess",
+	form_customer: "Học viên demo",
+	form_email: "hocvien@example.com",
+	form_readonly: "HV-00084",
+	table_rows: [
+		["INV-0841", "Lớp IELTS", "Paid", "1.500.000₫"],
+		["INV-0840", "Lớp Python", "Overdue", "1.920.000₫"],
+		["INV-0839", "Lớp Robotics", "Draft", "760.000₫"],
+		["INV-0838", "Lớp Toán", "Paid", "4.210.000₫"],
+	],
+};
+sanpra_uiv16.theme_studio_groups = [
+	{ id: "foundation", title: "Nền tảng", sections: ["colors", "typography", "layout"] },
+	{ id: "navigation", title: "Điều hướng", sections: ["navigation", "workspace", "controls"] },
+	{ id: "content", title: "Nội dung", sections: ["data", "features", "branding"] },
+	{ id: "system", title: "Hệ thống", sections: ["accessibility", "advanced", "operations"] },
+];
 
 /* ── 2. FRAPPE PAGE LIFECYCLE ────────────────────────────────────────────────
    Preserve unsaved local edits across SPA page shows; remove preview on leave. */
@@ -347,15 +372,15 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 				'<div class="sts-stage">' +
 					'<div class="sts-preview-frame" id="st-theme-studio-preview">' +
 						'<div class="sts-browser-bar"><span></span><span></span><span></span><div class="sts-browser-address">' +
-							'<img data-favicon-preview alt="" hidden><span><b data-app-title>Sanpra UI V16</b>' +
-							'<small data-app-tagline>sanpra-uiv16.local</small></span></div></div>' +
+							'<img data-favicon-preview alt="" hidden><span><b data-app-title>Edusuccess</b>' +
+							'<small data-app-tagline>edusuccess.vn</small></span></div></div>' +
 						this._navbar_html() +
 						'<div class="sts-app-shell">' +
 							this._sidebar_html() +
 							'<div class="sts-preview-main">' +
 								'<div class="sts-preview-page">' +
 									'<div class="sts-scene active" data-scene="dashboard">' +
-										'<div class="sts-preview-heading" data-inspector="dashboard.heading"><div><small>' + __("WORKSPACE") + '</small><h3>' + __("Good morning, Ayesha") + '</h3></div><button>' + __("Create new") + "</button></div>" +
+										'<div class="sts-preview-heading" data-inspector="dashboard.heading"><div><small>' + __("WORKSPACE") + '</small><h3>Chào buổi sáng, Giáo vụ</h3></div><button>' + __("Create new") + "</button></div>" +
 										'<div class="sts-drop-hint">' + this._icon("move") + __("Drag cards to rearrange your layout") + "</div>" +
 										'<div class="sts-empty-state"><i>◇</i><span>' + __("No pending approvals") + "</span></div>" +
 										'<div class="sts-canvas" id="sts-canvas"></div>' +
@@ -489,7 +514,7 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 		var section = this._section_for_key(item.keys[0]);
 		this.$inspector.addClass("is-open").html(
 			'<div class="sts-inspector-head"><div><small>' + __(item.scene) + '</small><b>' + __(item.title) +
-			'</b></div><button type="button" data-inspector-close title="' + __("Close inspector") + '">×</button></div>' +
+			'</b></div><span class="sts-inspector-actions"><button type="button" data-inspector-flip title="' + __("Flip inspector side") + '" aria-label="' + __("Flip inspector side") + '">⇄</button><button type="button" data-inspector-close title="' + __("Close inspector") + '">×</button></span></div>' +
 			'<p>' + __("Changes apply instantly to the preview and published theme.") + '</p><div class="sts-inspector-controls">' +
 			controls + '</div><button type="button" class="sts-inspector-more" data-open-control-section="' + section + '">' +
 			__("Open full settings section") + "</button>"
@@ -506,7 +531,7 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 		var label = entry.label || entry.title || (individual ? this.selected_chart_id : __("Global chart preview"));
 		this.$inspector.addClass("is-open").html(
 			'<div class="sts-inspector-head"><div><small>' + __(individual ? "Individual chart" : "Global chart defaults") + '</small><b>' + this._esc(label) +
-			'</b></div><button type="button" data-inspector-close title="' + __("Close inspector") + '">×</button></div>' +
+			'</b></div><span class="sts-inspector-actions"><button type="button" data-inspector-flip title="' + __("Flip inspector side") + '" aria-label="' + __("Flip inspector side") + '">⇄</button><button type="button" data-inspector-close title="' + __("Close inspector") + '">×</button></span></div>' +
 			'<p>' + __("Only explicit overrides are stored. Reset a property to inherit the global chart value.") + '</p><div class="sts-inspector-controls sts-chart-controls">' +
 			this._chart_controls_html(individual ? "individual" : "global", this.selected_chart_id || "", capability) +
 			(individual ? this._chart_series_controls_html(this.selected_chart_id, (this.workspace_selection && this.workspace_selection.series) || []) : "") +
@@ -532,6 +557,20 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 		left = Math.max(edge, Math.min(left, window.innerWidth - width - edge));
 		var top = Math.max(edge, Math.min(target.top, window.innerHeight - height - edge));
 		this.$inspector.attr("data-side", side).css({ left: left + "px", top: top + "px", visibility: "visible" });
+	}
+
+	/* T302: lật inspector sang phía đối diện (right<->left). Giữ nguyên
+	   selected_inspector; chỉ đổi side rồi định vị lại tương đối. */
+	_flip_inspector() {
+		if (!this.$inspector || !this.$inspector.hasClass("is-open")) return;
+		var current = this.$inspector.attr("data-side") || "right";
+		var next = current === "right" ? "left" : "right";
+		var width = Math.min(330, window.innerWidth - 24);
+		var height = this.$inspector.outerHeight();
+		var edge = 12, gap = 14;
+		var left = next === "right" ? window.innerWidth - width - edge : edge;
+		var top = Math.max(edge, Math.min(parseInt(this.$inspector.css("top"), 10) || edge, window.innerHeight - height - edge));
+		this.$inspector.attr("data-side", next).css({ left: left + "px", top: top + "px", visibility: "visible" });
 	}
 
 	_select_inspector(id, element) {
@@ -754,11 +793,34 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 
 	_tabs_html() {
 		var self = this;
-		return '<nav class="sts-tabs" aria-label="' + __("Theme categories") + '">' +
-			sanpra_uiv16.theme_studio_sections.map(function (section) {
-				return '<button type="button" data-section-tab="' + section.id + '" class="' +
-					(section.id === self.active_section ? "active" : "") + '"><b>' + section.index +
-					"</b><span>" + __(section.title) + "</span></button>";
+		var groups = sanpra_uiv16.theme_studio_groups || [];
+		var collapsed = {};
+		try { collapsed = JSON.parse(localStorage.getItem("sts-studio-groups-collapsed") || "{}") || {}; } catch (e) {}
+		if (!groups.length) {
+			return '<nav class="sts-tabs" aria-label="' + __("Theme categories") + '">' +
+				sanpra_uiv16.theme_studio_sections.map(function (section) {
+					return '<button type="button" data-section-tab="' + section.id + '" class="' +
+						(section.id === self.active_section ? "active" : "") + '"><b>' + section.index +
+						"</b><span>" + __(section.title) + "</span></button>";
+				}).join("") + "</nav>";
+		}
+		var byId = {};
+		sanpra_uiv16.theme_studio_sections.forEach(function (section) { byId[section.id] = section; });
+		return '<nav class="sts-tabs sts-tabs-grouped" aria-label="' + __("Theme categories") + '">' +
+			groups.map(function (group) {
+				var isCollapsed = !!collapsed[group.id];
+				var bodyId = "sts-tab-body-" + group.id;
+				var buttons = group.sections.map(function (sid) {
+					var section = byId[sid];
+					if (!section) return "";
+					return '<button type="button" data-section-tab="' + section.id + '" class="' +
+						(section.id === self.active_section ? "active" : "") + '"><b>' + section.index +
+						"</b><span>" + __(section.title) + "</span></button>";
+				}).join("");
+				return '<div class="sts-tab-group' + (isCollapsed ? " is-collapsed" : "") + '" data-group="' + group.id + '">' +
+					'<button type="button" class="sts-tab-group-head" data-group-toggle="' + group.id + '" aria-expanded="' + (!isCollapsed) + '" aria-controls="' + bodyId + '">' +
+					'<span>' + __(group.title) + '</span><i>▾</i></button>' +
+					'<div class="sts-tab-group-body" id="' + bodyId + '">' + buttons + "</div></div>";
 			}).join("") + "</nav>";
 	}
 
@@ -1167,7 +1229,7 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 		'</nav>';
 		return rail +
 			'<aside class="sts-preview-sidebar" data-inspector="navigation.sidebar">' +
-			'<button type="button" class="sts-preview-logo sts-sidebar-toggle" title="' + __("Expand or collapse sidebar") + '"><b>S</b><span data-app-title>Sanpra UI V16</span></button>' +
+			'<button type="button" class="sts-preview-logo sts-sidebar-toggle" title="' + __("Expand or collapse sidebar") + '"><b>E</b><span data-app-title>Edusuccess</span></button>' +
 			'<nav><small>' + __("MAIN") + '</small><a class="active">' + this._icon("home") + "<span>" + __("Overview") + "</span></a>" +
 			'<a>' + this._icon("chart") + "<span>" + __("Analytics") + "</span></a>" +
 			'<a>' + this._icon("invoice") + "<span>" + __("Invoices") + "</span></a>" +
@@ -1187,10 +1249,10 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 		return '<div class="sts-scene" data-scene="form"><div class="sts-preview-heading" data-inspector="form.heading"><div><small>' + __("DOCUMENT") +
 			'</small><h3>' + __("Customer profile") + '</h3></div><button>' + __("Save") + '</button></div>' +
 			'<div class="sts-form-card" data-inspector="form.card"><div class="sts-form-section-title">' + __("General information") + '</div><div class="sts-form-grid">' +
-			'<label data-inspector="form.fields"><span>' + __("Customer name") + '</span><input value="Northstar Trading"></label>' +
+			'<label data-inspector="form.fields"><span>' + __("Customer name") + '</span><input value="Học viên demo"></label>' +
 			'<label data-inspector="form.fields"><span>' + __("Customer group") + '</span><select><option>Commercial</option></select></label>' +
-			'<label data-inspector="form.fields"><span>' + __("Email address") + '</span><input value="hello@northstar.example"></label>' +
-			'<label data-inspector="form.fields"><span>' + __("Read-only field") + '</span><input readonly value="CUST-00084"></label>' +
+			'<label data-inspector="form.fields"><span>' + __("Email address") + '</span><input value="hocvien@example.com"></label>' +
+			'<label data-inspector="form.fields"><span>' + __("Read-only field") + '</span><input readonly value="HV-00084"></label>' +
 			'<label class="sts-preview-check" data-inspector="form.fields"><input type="checkbox" checked><i>✓</i><span>' + __("Email notifications") + '</span></label>' +
 			'<label class="sts-preview-disabled" data-inspector="form.fields"><span>' + __("Disabled field") + '</span><input disabled value="Unavailable"></label>' +
 			'<label class="sts-form-wide" data-inspector="form.fields"><span>' + __("Notes") + '</span><textarea>Priority account with quarterly review.</textarea></label>' +
@@ -1203,7 +1265,7 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 			'</small><h3>' + __("Sales invoices") + '</h3></div><button>' + __("New invoice") + '</button></div>' +
 			'<div class="sts-table-card" data-inspector="table.grid"><div class="sts-table-head"><span>ID</span><span>' + __("Customer") + '</span><span>' +
 			__("Status") + '</span><span>' + __("Amount") + '</span></div>' +
-			[['INV-0841','Northstar','Paid','$2,480'],['INV-0840','Acme Retail','Overdue','$1,920'],['INV-0839','Orbit Foods','Draft','$760'],['INV-0838','Harbor Labs','Paid','$4,210']].map(function (row, index) {
+			[['INV-0841','Lớp IELTS','Paid','1.500.000₫'],['INV-0840','Lớp Python','Overdue','1.920.000₫'],['INV-0839','Lớp Robotics','Draft','760.000₫'],['INV-0838','Lớp Toán','Paid','4.210.000₫']].map(function (row, index) {
 				return '<div class="sts-table-row' + (index === 1 ? " selected" : "") + '"><span>' + row[0] + '</span><span>' + row[1] +
 					'</span><span><i data-inspector="table.status" class="status-' + row[2].toLowerCase() + '">' + row[2] + '</i></span><strong>' + row[3] + '</strong></div>';
 			}).join("") + "</div></div>";
@@ -1224,7 +1286,7 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 			this._icon("mail") + '<input value="jane@example.com"></div></label><label data-inspector="login.fields"><span>' + __("Password") +
 			'</span><div class="sts-login-input">' + this._icon("lock") + '<input type="password" value="password">' +
 			this._icon("eye") + '</div></label><a class="sts-login-forgot">' + __("Forgot password?") + '</a>' +
-			'<button data-inspector="login.button">' + __("Continue") + '</button><small data-login-powered data-inspector="login.footer">' + __("Powered by Sanpra") +
+			'<button data-inspector="login.button">' + __("Continue") + '</button><small data-login-powered data-inspector="login.footer">' + __("Powered by Edusuccess") +
 			'</small></div></div><small class="sts-login-custom-footer" data-login-footer data-inspector="login.footer"></small></div>';
 	}
 
@@ -2272,6 +2334,22 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 			self.selected_inspector = null;
 			self._render_inspector();
 		});
+		this.$root.on("click", "[data-group-toggle]", function () {
+			var group = $(this).data("group-toggle");
+			var $group = self.$root.find('.sts-tab-group[data-group="' + group + '"]');
+			$group.toggleClass("is-collapsed");
+			var collapsed = !$group.hasClass("is-collapsed");
+			$(this).attr("aria-expanded", collapsed ? "true" : "false");
+			try {
+				var state = JSON.parse(localStorage.getItem("sts-studio-groups-collapsed") || "{}") || {};
+				if ($group.hasClass("is-collapsed")) state[group] = 1;
+				else delete state[group];
+				localStorage.setItem("sts-studio-groups-collapsed", JSON.stringify(state));
+			} catch (e) {}
+		});
+		this.$root.on("click", "[data-inspector-flip]", function () {
+			self._flip_inspector();
+		});
 		this.$root.on("input", "#sts-control-search", function () {
 			self._search_controls(this.value);
 		});
@@ -2314,6 +2392,17 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 				if (match) matches++;
 			});
 			$panel.toggleClass("search-match", matches > 0);
+		});
+		/* T301: đang tìm thì mở mọi nhóm accordion để kết quả không bị giấu
+		   trong nhóm gập; hết tìm thì nhóm nào gập vẫn gập (CSS lo). */
+		this.$root.find(".sts-tab-group").each(function () {
+			var $group = $(this);
+			var hasHit = $group.find("[data-section-tab]").toArray().some(function (btn) {
+				var sid = btn.getAttribute("data-section-tab");
+				return $panels.filter('[data-section="' + sid + '"].search-match').length > 0;
+			});
+			$group.toggleClass("is-collapsed", !hasHit);
+			$group.find("[data-group-toggle]").attr("aria-expanded", hasHit ? "true" : "false");
 		});
 	}
 
@@ -3064,8 +3153,8 @@ sanpra_uiv16.ThemeStudio = class ThemeStudio {
 		$target.attr("data-large-text", String(!!c.large_text));
 		$target.attr("data-sticky-navbar", String(!!c.sticky_navbar));
 		$target.attr("data-sticky-form-toolbar", String(!!c.sticky_form_toolbar));
-		$target.find("[data-app-title]").text(loginSettings.app_title || "Sanpra UI V16");
-		$target.find("[data-app-tagline]").text(loginSettings.tagline || "sanpra-uiv16.local");
+		$target.find("[data-app-title]").text(loginSettings.app_title || "Edusuccess");
+		$target.find("[data-app-tagline]").text(loginSettings.tagline || "edusuccess.vn");
 		var $favicon = $target.find("[data-favicon-preview]");
 		$favicon.off("error.sts load.sts")
 			.on("error.sts", function () { this.hidden = true; })
