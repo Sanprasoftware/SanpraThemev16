@@ -945,6 +945,20 @@ a:hover { color: var(--st-primary-hover) !important; opacity: 0.85; }
   top: 0 !important;
   z-index: var(--zi-raised) !important;
 }
+/* Form tab strip must stick BELOW the stuck page-head, not under it.
+   Core pins tabs at var(--navbar-height)=48px while the theme parks the
+   page-head at 36px+h(~49px) with z-index 1010 -> 37px overlap measured
+   on staging (AUDIT_UI-2-ANH-LOI bug #2). Mirror core's own
+   `.form-tabs-sticky-down.show-navbar` pattern with the theme offset. */
+.form-tabs-list.form-tabs-sticky-up,
+.form-tabs-list.form-tabs-sticky-down {
+  top: calc(var(--st-header-height, 36px) + var(--page-head-height, 48px) - 1px) !important;
+}
+/* Side-panel form never gets sticky-up/down classes (core scroll listener
+   binds .main-section only), so pin its tabs to the panel scrollport top. */
+.side-panel .form-tabs-list {
+  top: 0 !important;
+}
 .list-row:hover,
 .dt-row:hover {
   background: var(--st-list-row-hover) !important;
