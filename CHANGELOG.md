@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.6.3] — 2026-11-08 — App grid private workspaces + greeting width
+
+### Fixed
+- Module grid loc lại workspace `public=0` cho viewer (bỏ filter `!p.public`; server API đã lọc theo quyền) — Giám sát vận hành xuất hiện ở "Ứng dụng của bạn".
+- Greeting Hôm nay 1 dòng với tên dài (welcome flex:1 + clamp 22–30px + keep-all); KPI/tile giữ centr.
+- Bump `module_cards.js?v=10→11` (cache-bust).
+
 ## [2.6.2] — 2026-11-08 — Smart Home polish
 
 ### Fixed
