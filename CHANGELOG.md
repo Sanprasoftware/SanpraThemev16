@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.6.2] — 2026-11-08 — Smart Home polish
+
+### Fixed
+- KPI icon trang Hôm nay căn giữa thẻ (góc trái) — `.st-sh-kpi-top` centr + trend arrow giữ phải.
+- Font greeting Hôm nay: Georgia tách dấu tiếng Việt ("tố i") → ưu tiên Inter đã self-host (subset vietnamese U+0102-U+1EA0 trong fonts.css).
+- Tile "Ứng dụng của bạn" icon + chữ căn giữa (`module_cards.css`).
+- Bump `smart_home.css?v=11->12` (cache-bust).
+
 ## [2.6.1] — 2026-11-05 — UAT follow-up
 
 ### Fixed
