@@ -111,7 +111,7 @@
         var topLevel = [];
         for (var i = 0; i < pages.length; i++) {
           var p = pages[i];
-          if (p.parent_page || p.is_hidden || !p.public) continue;
+          if (p.parent_page || p.is_hidden) continue;
           /* Skip Home itself — we ARE the home page */
           if ((p.name || "").toLowerCase() === "home") continue;
           /* Skip pure module-level parents that are just navigation groupers */

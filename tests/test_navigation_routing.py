@@ -38,6 +38,12 @@ class NavigationRoutingTest(unittest.TestCase):
         self.assertNotIn("isEmptyOrWorkspace", js)
         self.assertIn("bootinfo.home_page owns the initial Smart Home redirect", js)
 
+    def test_private_workspaces_reach_viewers(self):
+        js = MODULE_CARDS.read_text(encoding="utf-8")
+
+        self.assertNotIn("!p.public", js)
+        self.assertIn("p.parent_page || p.is_hidden", js)
+
     def test_command_palette_uses_real_workspace_slug(self):
         js = PALETTE.read_text(encoding="utf-8")
 
